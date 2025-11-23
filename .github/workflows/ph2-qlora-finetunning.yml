@@ -1,0 +1,34 @@
+name: Train and Push ph2 LoRA Model
+
+on:
+  workflow_dispatch:
+
+jobs:
+  train:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run: |
+          cd src/ph2-qlora-finetunning
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set HF token
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: echo "HF_TOKEN=${HF_TOKEN}" >> $GITHUB_ENV
+
+      - name: Train LoRA model
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          cd src/ph2-qlora-finetunning
+          python train-in-git.py

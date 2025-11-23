@@ -9,7 +9,14 @@ dependencies = [
     "ipywidgets>=8.1.5",
     "torch>=2.9.0",
     "skilearn>=0.1.0",
-    "matplotlib>=3.10.7"
+    "matplotlib>=3.10.7",
+    "transformers",
+    "peft",
+    "datasets",
+    "bitsandbytes",
+    "pandas",
+    "python-dotenv>=1.0.1",
+
 ]
 
 [dependency-groups]
